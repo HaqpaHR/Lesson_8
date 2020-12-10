@@ -41,7 +41,7 @@ const grades = {
     };
 
     this.fine = (fineString) => {
-      this.salary -= taxes[fineString];
+      this.reducedsalary = this.salary - taxes[fineString];
     };
    
    
