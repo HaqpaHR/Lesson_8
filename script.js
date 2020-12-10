@@ -3,12 +3,6 @@ const grades = {
     Middle: 'middle',
     Senior: 'senior',
   };
-  
-  const punishments = {
-    Low: 'low',
-    Critical: 'critical',
-    Blocker: 'blocker',
-  };
 
   const bonuses = {
     'C++': 100,
@@ -20,6 +14,18 @@ const grades = {
     [grades.Junior]: 0.25,
     [grades.Middle]: 0.5,
     [grades.Senior]: 0.75,
+  };
+
+  const punishments = {
+    Late: 'late',
+    Miss: 'miss_job',
+    Lost: 'lost',
+  };
+
+  const taxes = {
+    [punishments.Late]: 100,
+    [punishments.Miss]: 200,
+    [punishments.Lost]: 300,
   };
   
   function User(name, language, grade = grades.Junior) {
@@ -34,18 +40,11 @@ const grades = {
       this.tasks++;
     };
 
-    
-    this.fine = (punishment) => {
-      if (punishment == punishments.Low) {
-        this.salary -=10;
-      } else if (punishment == punishments.Critical) {
-        this.salary -=100;
-      } else if (punishment == punishments.Blocker) {
-        this.salary -=1000;
-      } else (this.salary);
-
+    this.fine = (fineString) => {
+      this.salary -= taxes[fineString];
     };
- 
+   
+   
     /**
      * This method...
      */
@@ -119,8 +118,26 @@ const grades = {
   user1.finishTask();
   user.upgrade();
   user1.upgrade();
-
-  user.fine(punishments.Blocker);
+  
+  user.fine(punishments.Late);
+  user1.fine(punishments.Lost);
 
   console.log(user);
   console.log(user1);
+
+
+  // const punishments = {
+  //   Late: 'late',
+  //   Miss: 'miss_job',
+  //   Lost: 'lost',
+  // };
+
+  // const taxes = {
+  //   [punishments.Late]: 100,
+  //   [punishments.Miss]: 200,
+  //   [punishments.Lost]: 300,
+  // };
+
+  // this.fine = (fineString) => {
+  //   return taxes[fineString];
+  // };
